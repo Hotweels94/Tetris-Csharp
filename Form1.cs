@@ -14,6 +14,7 @@ namespace Tetris_C_
     public partial class Form1 : Form
     {
         Shape currentShape;
+        Shape nextShape;
         Timer timer = new Timer();
         public Form1()
         {
@@ -22,10 +23,13 @@ namespace Tetris_C_
             loadCanvas();
 
             currentShape = getRandomShapeWithCenterAligned();
+            nextShape = getNextShape();
 
             timer.Tick += Timer_Tick;
             timer.Interval = 500;
             timer.Start();
+
+            this.KeyDown += Form1_KeyDown;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -41,7 +45,10 @@ namespace Tetris_C_
                 updateCanvasDotArrayWithCurrentShape();
 
                 // get next shape
-                currentShape = getRandomShapeWithCenterAligned();
+                currentShape = nextShape;
+                nextShape = getNextShape();
+
+                clearFilledRowsAndUpdateScore();
             }
         }
         Bitmap canvasBitmap;
@@ -161,8 +168,115 @@ namespace Tetris_C_
             }
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            var verticalMove = 0;
+            var horizontalMove = 0;
 
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    verticalMove--;
+                    break;
 
+                case Keys.Right:
+                    verticalMove++;
+                    break;
 
+                case Keys.Down:
+                    horizontalMove++;
+                    break;
+
+                case Keys.Up:
+                    currentShape.turn();
+                    break;
+
+                default:
+                    return;
+            }
+
+            var isMoveSuccess = moveShapeIfPossible(horizontalMove, verticalMove);
+
+            if (!isMoveSuccess && e.KeyCode == Keys.Up)
+                currentShape.rollback();
+        }
+
+        int score;
+
+        public void clearFilledRowsAndUpdateScore()
+        {
+            for (int i = 0; i < canvasHeight; i++)
+            {
+                int j;
+                for (j = canvasWidth - 1; j >= 0; j--)
+                {
+                    if (canvasDotArray[j, i] == 0)
+                    {
+                        break;
+                    }
+                }
+                if (j == -1)
+                {
+                    score++;
+                    label1.Text = "Score: " + score;
+                    label2.Text = "Level: " + score / 10;
+                    timer.Interval -= 10;
+
+                    for (j = 0; j < canvasWidth; j++)
+                    {
+                        for (int k = i; k > 0; k--)
+                        {
+                            canvasDotArray[j, k] = canvasDotArray[j, k - 1];
+                        }
+
+                        canvasDotArray[j, 0] = 0;
+                    }
+                }
+            }
+            
+            for (int i = 0; i < canvasWidth; i++)
+            {
+                for (int j = 0; j < canvasHeight; j++)
+                {
+                    canvasGraphics = Graphics.FromImage(canvasBitmap);
+                    canvasGraphics.FillRectangle(
+                        canvasDotArray[i, j] == 1 ? Brushes.Black : Brushes.LightGray,
+                        i * dotSize, j * dotSize, dotSize, dotSize
+                        );
+                }
+            }
+            pictureBox1.Image = canvasBitmap;
+        }
+
+        Bitmap nextShapeBitmap;
+        Graphics nextShapeGraphics;
+
+        private Shape getNextShape()
+        {
+            var shape = getRandomShapeWithCenterAligned();
+
+            nextShapeBitmap = new Bitmap(6 * dotSize, 6 * dotSize);
+            nextShapeGraphics = Graphics.FromImage(nextShapeBitmap);
+
+            nextShapeGraphics.FillRectangle(Brushes.LightGray, 0, 0, nextShapeBitmap.Width, nextShapeBitmap.Height);
+
+            var startX = (6 - shape.Width) / 2;
+            var startY = (6 - shape.Height) / 2;
+
+            for (int i = 0; i < shape.Height; i++)
+            {
+                for (int j = 0; j < shape.Width; j++)
+                {
+                    nextShapeGraphics.FillRectangle(
+                        shape.Dots[i, j] == 1 ? Brushes.Black : Brushes.LightGray,
+                        (startX + j) * dotSize, (startY + i) * dotSize, dotSize, dotSize);
+                }
+            }
+
+            pictureBox2.Size = nextShapeBitmap.Size;
+            pictureBox2.Image = nextShapeBitmap;
+
+            return shape;
+        }
     }
 }
