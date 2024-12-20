@@ -125,42 +125,42 @@ namespace Tetris_C_
 
         // returns if it reaches the bottom or touches any other blocks
         private bool moveShapeIfPossible(int moveDown = 0, int moveSide = 0)
-{
-    var newX = currentX + moveSide;
-    var newY = currentY + moveDown;
-
-    //Verify is the shape is out of the grid
-    if (newX < 0 || newX + currentShape.Width > canvasWidth
-        || newY + currentShape.Height > canvasHeight)
-        return false;
-
-    //Verify if the sahpe touch other shape
-    for (int i = 0; i < currentShape.Width; i++)
-    {
-        for (int j = 0; j < currentShape.Height; j++)
         {
-            if (currentShape.Dots[j, i] == 1) //IF this dot is appart of the shape
-            {
-                int targetX = newX + i;
-                int targetY = newY + j;
+            var newX = currentX + moveSide;
+            var newY = currentY + moveDown;
 
-                //Verify that the space is blank
-                if (targetY >= 0 && canvasDotArray[targetX, targetY] != Brushes.LightGray)
+            //Verify is the shape is out of the grid
+            if (newX < 0 || newX + currentShape.Width > canvasWidth
+                || newY + currentShape.Height > canvasHeight)
+                return false;
+
+            //Verify if the sahpe touch other shape
+            for (int i = 0; i < currentShape.Width; i++)
+            {
+                for (int j = 0; j < currentShape.Height; j++)
                 {
-                    return false;
+                    if (currentShape.Dots[j, i] == 1) //IF this dot is appart of the shape
+                    {
+                        int targetX = newX + i;
+                        int targetY = newY + j;
+
+                        //Verify that the space is blank
+                        if (targetY >= 0 && canvasDotArray[targetX, targetY] != Brushes.LightGray)
+                        {
+                            return false;
+                        }
+                    }
                 }
             }
+
+
+            currentX = newX;
+            currentY = newY;
+
+            drawShape();
+
+            return true;
         }
-    }
-
- 
-    currentX = newX;
-    currentY = newY;
-
-    drawShape();
-
-    return true;
-}
 
 
         private void drawShape()
@@ -208,6 +208,12 @@ namespace Tetris_C_
                 case Keys.Up:
                     currentShape.turn();
                     break;
+
+                /*
+                case Keys.C:
+                    currentShape.keep(nextShape);
+                    break; */
+
                 default:
                     return;
             }
@@ -221,7 +227,7 @@ namespace Tetris_C_
         }
 
         int score;
-       public void clearFilledRowsAndUpdateScore()
+        public void clearFilledRowsAndUpdateScore()
         {
             for (int i = canvasHeight - 1; i >= 0; i--)
             {
