@@ -16,6 +16,7 @@ namespace Tetris_C_
         Shape currentShape;
         Shape nextShape;
         Timer timer = new Timer();
+        Shape holdShape = null;
         public Form1()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace Tetris_C_
 
             currentShape = getRandomShapeWithCenterAligned();
             nextShape = getNextShape();
+            holdShape = getHoldShape();
 
             timer.Tick += Timer_Tick;
             timer.Interval = 500;
@@ -209,10 +211,22 @@ namespace Tetris_C_
                     currentShape.turn();
                     break;
 
-                /*
+                // Hold a piece for later
                 case Keys.C:
-                    currentShape.keep(nextShape);
-                    break; */
+                    if (holdShape == null)
+                    {
+                        holdShape = currentShape;
+                        currentShape = nextShape;
+                        nextShape = getNextShape();
+                    }
+                    else
+                    {
+                        Shape temp = currentShape;
+                        currentShape = holdShape;
+                        holdShape = temp; ;
+                    }
+                    getHoldShape();
+                    break;
 
                 default:
                     return;
@@ -328,6 +342,40 @@ namespace Tetris_C_
             pictureBox2.Size = nextShapeBitmap.Size;
             pictureBox2.Image = nextShapeBitmap;
 
+            return shape;
+        }
+
+        Bitmap holdShapeBitmap;
+        Graphics holdShapeGraphics;
+        private Shape getHoldShape()
+        {
+            var shape = holdShape;
+
+            // Codes to show the hold shape in the side panel
+            holdShapeBitmap = new Bitmap(6 * dotSize, 6 * dotSize);
+            holdShapeGraphics = Graphics.FromImage(holdShapeBitmap);
+
+            holdShapeGraphics.FillRectangle(Brushes.LightGray, 0, 0, holdShapeBitmap.Width, holdShapeBitmap.Height);
+
+            // Find the ideal position for the shape in the side panel
+            if (shape != null)
+            {
+                var startX = (6 - shape.Width) / 2;
+                var startY = (6 - shape.Height) / 2;
+
+                for (int i = 0; i < shape.Height; i++)
+                {
+                    for (int j = 0; j < shape.Width; j++)
+                    {
+                        holdShapeGraphics.FillRectangle(
+                            shape.Dots[i, j] == 1 ? shape.Color : Brushes.LightGray,
+                            (startX + j) * dotSize, (startY + i) * dotSize, dotSize, dotSize);
+                    }
+                }
+
+                pictureBox3.Size = holdShapeBitmap.Size;
+                pictureBox3.Image = holdShapeBitmap;
+            }
             return shape;
         }
     }

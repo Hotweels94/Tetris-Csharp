@@ -46,13 +46,5 @@ namespace Tetris_C_.Shapes
             Width = Height;
             Height = temp;
         }
-
-        /*
-        public Shape keep(Shape nextShape) 
-        {
-            Shape oldShape = this;
-            currentShape = nextShape;
-            return oldShape;             
-        }*/
     }
 }
