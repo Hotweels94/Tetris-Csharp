@@ -53,7 +53,7 @@
             // 
             pictureBox2.Location = new System.Drawing.Point(768, 214);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new System.Drawing.Size(214, 202);
+            pictureBox2.Size = new System.Drawing.Size(120, 120);
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
             // 
@@ -86,9 +86,10 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.BackColor = System.Drawing.Color.LightGray;
             pictureBox3.Location = new System.Drawing.Point(768, 487);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new System.Drawing.Size(214, 202);
+            pictureBox3.Size = new System.Drawing.Size(120, 120);
             pictureBox3.TabIndex = 5;
             pictureBox3.TabStop = false;
             // 
