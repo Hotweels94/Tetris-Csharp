@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,8 @@ namespace Tetris_C_.Shapes
                         {
                             { 1, 1 },
                             { 1, 1 }
-                        }
+                        },
+                        Color = Brushes.Yellow
                     },
                     new Shape {
                         Width = 1,
@@ -34,7 +36,9 @@ namespace Tetris_C_.Shapes
                             { 1 },
                             { 1 },
                             { 1 }
-                        }
+                        },
+                        Color = Brushes.Aqua
+
                     },
                     new Shape {
                         Width = 3,
@@ -43,7 +47,9 @@ namespace Tetris_C_.Shapes
                         {
                             { 0, 1, 0 },
                             { 1, 1, 1 }
-                        }
+                        },
+                        Color = Brushes.MediumPurple
+
                     },
                     new Shape {
                         Width = 3,
@@ -52,7 +58,8 @@ namespace Tetris_C_.Shapes
                         {
                             { 0, 0, 1 },
                             { 1, 1, 1 }
-                        }
+                        },
+                        Color = Brushes.Orange
                     },
                     new Shape {
                         Width = 3,
@@ -61,7 +68,8 @@ namespace Tetris_C_.Shapes
                         {
                             { 1, 0, 0 },
                             { 1, 1, 1 }
-                        }
+                        },
+                        Color = Brushes.DarkBlue
                     },
                     new Shape {
                         Width = 3,
@@ -70,7 +78,8 @@ namespace Tetris_C_.Shapes
                         {
                             { 1, 1, 0 },
                             { 0, 1, 1 }
-                        }
+                        },
+                        Color = Brushes.Red
                     },
                     new Shape {
                         Width = 3,
@@ -79,7 +88,8 @@ namespace Tetris_C_.Shapes
                         {
                             { 0, 1, 1 },
                             { 1, 1, 0 }
-                        }
+                        },
+                        Color = Brushes.Green   
                     }
                     // new shapes can be added here..
                 };

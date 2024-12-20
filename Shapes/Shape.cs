@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,13 @@ namespace Tetris_C_.Shapes
         public int Width;
         public int Height;
         public int[,] Dots;
+        public Brush Color;
+
 
         private int[,] backupDots;
+
+
+
 
         public void turn()
         {

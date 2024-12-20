@@ -134,7 +134,7 @@ namespace Tetris_C_
                 for (int j = 0; j < currentShape.Height; j++)
                 {
                     if (currentShape.Dots[j, i] == 1)
-                        workingGraphics.FillRectangle(Brushes.Black, (currentX + i) * dotSize, (currentY + j) * dotSize, dotSize, dotSize);
+                        workingGraphics.FillRectangle(currentShape.Color, (currentX + i) * dotSize, (currentY + j) * dotSize, dotSize, dotSize);
                 }
             }
 
@@ -240,7 +240,7 @@ namespace Tetris_C_
                 {
                     canvasGraphics = Graphics.FromImage(canvasBitmap);
                     canvasGraphics.FillRectangle(
-                        canvasDotArray[i, j] == 1 ? Brushes.Black : Brushes.LightGray,
+                        canvasDotArray[i, j] == 1 ? Brushes.Transparent : Brushes.LightGray,
                         i * dotSize, j * dotSize, dotSize, dotSize
                         );
                 }
@@ -268,7 +268,7 @@ namespace Tetris_C_
                 for (int j = 0; j < shape.Width; j++)
                 {
                     nextShapeGraphics.FillRectangle(
-                        shape.Dots[i, j] == 1 ? Brushes.Black : Brushes.LightGray,
+                        shape.Dots[i, j] == 1 ? shape.Color : Brushes.LightGray,
                         (startX + j) * dotSize, (startY + i) * dotSize, dotSize, dotSize);
                 }
             }
