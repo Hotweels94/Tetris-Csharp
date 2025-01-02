@@ -4,5 +4,8 @@
     <Compile Update="Form1\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
