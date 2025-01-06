@@ -4,17 +4,24 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Tetris_C_
 {
     public partial class MainMenu : Form
     {
+
+        public bool playMusic = true;
+
         public MainMenu()
         {
             InitializeComponent();
+            SoundPlayer music = new SoundPlayer("C:\\Tetris-Csharp\\Music\\music_tetris.wav");
+            music.Play();
         }
 
         // Play Button
@@ -37,7 +44,15 @@ namespace Tetris_C_
                 case DialogResult.No:
                     break;
             }
-            
+
+        }
+
+        // Options Button
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Options objOptions = new Options();
+            objOptions.Show();
+            this.Hide();
         }
     }
 }

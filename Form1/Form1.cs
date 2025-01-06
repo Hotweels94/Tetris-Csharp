@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tetris_C_.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Tetris_C_
 {
@@ -377,6 +378,10 @@ namespace Tetris_C_
                 pictureBox3.Image = holdShapeBitmap;
             }
             return shape;
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

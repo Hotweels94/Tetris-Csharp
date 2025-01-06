@@ -31,6 +31,7 @@
             label1 = new System.Windows.Forms.Label();
             button1 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
+            button3 = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // label1
@@ -54,7 +55,7 @@
             // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(354, 204);
+            button2.Location = new System.Drawing.Point(354, 232);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(94, 29);
             button2.TabIndex = 2;
@@ -62,11 +63,22 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button3
+            // 
+            button3.Location = new System.Drawing.Point(354, 180);
+            button3.Name = "button3";
+            button3.Size = new System.Drawing.Size(94, 29);
+            button3.TabIndex = 3;
+            button3.Text = "Options";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label1);
@@ -80,5 +92,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
