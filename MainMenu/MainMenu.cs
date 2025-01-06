@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -20,7 +21,13 @@ namespace Tetris_C_
         public MainMenu()
         {
             InitializeComponent();
-            SoundPlayer music = new SoundPlayer("C:\\Tetris-Csharp\\Music\\music_tetris.wav");
+            string projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
+
+
+            string relativePath = Path.Combine(projectRoot, "Music", "music_tetris.wav");
+
+
+            SoundPlayer music = new SoundPlayer(relativePath);
             music.Play();
         }
 
