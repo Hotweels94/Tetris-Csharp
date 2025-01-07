@@ -44,16 +44,17 @@
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(335, 119);
+            button1.Location = new System.Drawing.Point(333, 91);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(94, 29);
             button1.TabIndex = 1;
-            button1.Text = "button1";
+            button1.Text = "On / Off";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(315, 374);
+            button2.Location = new System.Drawing.Point(312, 373);
             button2.Name = "button2";
             button2.Size = new System.Drawing.Size(147, 29);
             button2.TabIndex = 2;

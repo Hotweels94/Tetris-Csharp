@@ -12,14 +12,28 @@ namespace Tetris_C_
 {
     public partial class Options : Form
     {
+        MainMenu objMainMenu = new MainMenu();
+
         public Options()
         {
             InitializeComponent();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (objMainMenu.musicPlaying)
+            {
+                objMainMenu.music.Stop();
+                objMainMenu.musicPlaying = false;
+            } else
+            {
+                objMainMenu.music.Play();
+                objMainMenu.musicPlaying = true;
+            } 
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            MainMenu objMainMenu = new MainMenu();
             objMainMenu.Show();
             this.Hide();
         }

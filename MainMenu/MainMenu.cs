@@ -10,24 +10,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
+using static System.Windows.Forms.Design.AxImporter;
 
 namespace Tetris_C_
 {
     public partial class MainMenu : Form
     {
-
-        public bool playMusic = true;
+        public SoundPlayer music;
+        public bool musicPlaying = true;
 
         public MainMenu()
         {
             InitializeComponent();
+
             string projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
-
-
             string relativePath = Path.Combine(projectRoot, "Music", "music_tetris.wav");
-
-
-            SoundPlayer music = new SoundPlayer(relativePath);
+            music = new SoundPlayer(relativePath);
             music.Play();
         }
 
@@ -60,6 +59,11 @@ namespace Tetris_C_
             Options objOptions = new Options();
             objOptions.Show();
             this.Hide();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
