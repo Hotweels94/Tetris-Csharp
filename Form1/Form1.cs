@@ -267,7 +267,7 @@ namespace Tetris_C_
 
                     if (score % 5 == 0 || score == 5)
                     {
-                        timer.Interval = Math.Max(50, timer.Interval - 25);
+                        timer.Interval = Math.Max(50, timer.Interval - 100);
 
                     }
 
