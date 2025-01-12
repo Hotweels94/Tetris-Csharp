@@ -263,9 +263,14 @@ namespace Tetris_C_
                 {
                     score++;
                     label1.Text = "Score: " + score;
-                    label2.Text = "Level: " + (score / 10);
+                    label2.Text = "Level: " + (score / 5);
 
-                    timer.Interval = Math.Max(50, timer.Interval - 10);
+                    if (score % 2 == 0)
+                    {
+                        timer.Interval = Math.Max(50, timer.Interval - 25);
+
+                    }
+
 
                     // Make all the above lines down from 1 block
                     for (int k = i; k > 0; k--)
