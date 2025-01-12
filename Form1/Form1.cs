@@ -265,7 +265,7 @@ namespace Tetris_C_
                     label1.Text = "Score: " + score;
                     label2.Text = "Level: " + (score / 5);
 
-                    if (score % 2 == 0)
+                    if (score % 5 == 0 || score == 5)
                     {
                         timer.Interval = Math.Max(50, timer.Interval - 25);
 
